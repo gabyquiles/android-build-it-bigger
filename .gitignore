@@ -6,3 +6,4 @@
 /build
 /captures
 .idea
+app/src/res/values/secrets.xml

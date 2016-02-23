@@ -39,5 +39,6 @@ public class JokeFetcherTest extends AndroidTestCase {
         mSignal.await(10, TimeUnit.SECONDS);
         assertNotNull("Didn't received a joke", mJoke);
         assertFalse("Joke received is empty", TextUtils.isEmpty(mJoke));
+        assertNotSame("No connection to server", "Not in the mood of making jokes. Error getting a joke", mJoke);
     }
 }

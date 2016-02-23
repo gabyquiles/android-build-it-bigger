@@ -36,3 +36,20 @@ dependencies {
     freeCompile 'com.google.android.gms:play-services-ads:8.4.0'
     compile project(path: ':JokeBackend', configuration: 'android-endpoints')
 }
+
+
+task startServer(dependsOn: ":JokeBackend:appengineRun") {
+    evaluationDependsOn ':JokeBackend'
+    project(':JokeBackend') {
+        appengine{
+            daemon true
+        }
+    }
+}
+
+task runAllTests () {
+    dependsOn  = [startServer, "connectedCheck", "check"]
+    finalizedBy ':JokeBackend:appengineStop'
+    connectedCheck.mustRunAfter startServer
+    check.mustRunAfter startServer
+}
